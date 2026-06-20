@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DDR AI — Professional Report Generator</title>
+  
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◈</text></svg>" />
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="../styles/homepage.css" />
+</head>
+<body>
+  <!-- ============================================================ -->
+  <!-- NAVIGATION                                                   -->
+  <!-- ============================================================ -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="./index.html" class="nav-logo" aria-label="DDR AI Home">
+        <span class="logo-mark" aria-hidden="true">◈</span>
+        <span class="logo-text">DDR<span class="logo-accent">AI</span></span>
+      </a>
+      
+      <div class="nav-center">
+        <span class="nav-badge" id="navBadge">
+          <span class="nav-badge-dot"></span>
+          <span class="nav-badge-text">v2.0 · Enterprise</span>
+        </span>
+      </div>
+      
+      <div class="nav-status" id="navStatus" role="status" aria-live="polite">
+        <span class="status-dot status-dot--idle" id="statusDot"></span>
+        <span class="status-text" id="statusText">Ready</span>
+        <span class="status-metrics" id="statusMetrics"></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================================ -->
+  <!-- MAIN                                                         -->
+  <!-- ============================================================ -->
+  <main class="main" role="main">
+    
+    <!-- ===== HERO ===== -->
+    <header class="hero">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="hero-badge-pulse"></span>
+          <span>AI-Powered Diagnostic Intelligence</span>
+        </div>
+        <h1 class="hero-title">
+          Generate Professional<br />
+          <span class="hero-title-accent">DDR Reports</span>
+        </h1>
+        <p class="hero-sub">
+          Upload inspection and thermal reports. Our AI extracts findings, detects conflicts, 
+          and generates comprehensive diagnostic documentation.
+        </p>
+        
+        <div class="hero-stats" id="heroStats">
+          <div class="hero-stat">
+            <span class="hero-stat-value" id="processedCount">0</span>
+            <span class="hero-stat-label">Reports Generated</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-value" id="avgTime">—</span>
+            <span class="hero-stat-label">Avg. Processing</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-value" id="accuracyRate">—</span>
+            <span class="hero-stat-label">Confidence Score</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== UPLOAD SECTION ===== -->
+    <section class="upload-section" aria-labelledby="upload-heading">
+      <h2 id="upload-heading" class="section-heading">Upload Reports</h2>
+      <p class="section-description">Upload both inspection and thermal PDF reports to generate a comprehensive DDR.</p>
+      
+      <div class="upload-grid" id="uploadGrid">
+        
+        <!-- Inspection Upload -->
+        <div class="upload-card" id="inspectionCard">
+          <div class="upload-header">
+            <span class="upload-icon" aria-hidden="true">📋</span>
+            <span class="upload-label">Inspection Report</span>
+          </div>
+          
+          <div class="upload-zone" id="inspectionZone"
+               role="button"
+               tabindex="0"
+               aria-label="Upload Inspection Report PDF"
+               data-target="inspectionFile">
+            <div class="upload-zone-icon">
+              <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                <rect width="48" height="48" rx="12" fill="currentColor" opacity="0.08"/>
+                <path d="M16 32V20a2 2 0 012-2h8l6 6v8a2 2 0 01-2 2H18a2 2 0 01-2-2z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M26 18v6h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="upload-zone-text">
+              <span class="upload-zone-primary">Drop your inspection report here</span>
+              <span class="upload-zone-secondary">or <span class="upload-link">browse files</span></span>
+            </div>
+            <div class="upload-constraints">
+              <span class="upload-constraint">PDF</span>
+              <span class="upload-constraint">≤ 20 MB</span>
+              <span class="upload-constraint">Accepted</span>
+            </div>
+            <input type="file" id="inspectionFile" accept=".pdf" class="upload-input" aria-label="Inspection report file input" />
+          </div>
+          
+          <div class="file-info" id="inspectionInfo" hidden>
+            <div class="file-info-icon" aria-hidden="true">📄</div>
+            <div class="file-info-details">
+              <div class="file-info-name" id="inspectionName">—</div>
+              <div class="file-info-meta">
+                <span class="file-info-size" id="inspectionSize">—</span>
+                <span class="file-info-status" id="inspectionStatus">✓ Ready</span>
+              </div>
+            </div>
+            <button class="file-info-remove" id="inspectionRemove" aria-label="Remove inspection file">✕</button>
+          </div>
+        </div>
+
+        <!-- Thermal Upload -->
+        <div class="upload-card" id="thermalCard">
+          <div class="upload-header">
+            <span class="upload-icon" aria-hidden="true">🌡️</span>
+            <span class="upload-label">Thermal Report</span>
+          </div>
+          
+          <div class="upload-zone" id="thermalZone"
+               role="button"
+               tabindex="0"
+               aria-label="Upload Thermal Report PDF"
+               data-target="thermalFile">
+            <div class="upload-zone-icon">
+              <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                <rect width="48" height="48" rx="12" fill="currentColor" opacity="0.08"/>
+                <path d="M24 12v4M20 14l2 3M28 14l-2 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                <circle cx="24" cy="28" r="8" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M24 22v6l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="upload-zone-text">
+              <span class="upload-zone-primary">Drop your thermal report here</span>
+              <span class="upload-zone-secondary">or <span class="upload-link">browse files</span></span>
+            </div>
+            <div class="upload-constraints">
+              <span class="upload-constraint">PDF</span>
+              <span class="upload-constraint">≤ 20 MB</span>
+              <span class="upload-constraint">Accepted</span>
+            </div>
+            <input type="file" id="thermalFile" accept=".pdf" class="upload-input" aria-label="Thermal report file input" />
+          </div>
+          
+          <div class="file-info" id="thermalInfo" hidden>
+            <div class="file-info-icon" aria-hidden="true">🌡️</div>
+            <div class="file-info-details">
+              <div class="file-info-name" id="thermalName">—</div>
+              <div class="file-info-meta">
+                <span class="file-info-size" id="thermalSize">—</span>
+                <span class="file-info-status" id="thermalStatus">✓ Ready</span>
+              </div>
+            </div>
+            <button class="file-info-remove" id="thermalRemove" aria-label="Remove thermal file">✕</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== GENERATE SECTION ===== -->
+    <section class="generate-section">
+      <div class="generate-row">
+        <button class="btn-generate" id="generateBtn" disabled aria-label="Generate DDR Report">
+          <span class="btn-generate-icon" aria-hidden="true">◈</span>
+          <span class="btn-generate-label">Generate DDR Report</span>
+          <span class="btn-generate-shortcut">⌘G</span>
+        </button>
+        <p class="generate-note">Both reports required to proceed</p>
+      </div>
+    </section>
+
+    <!-- ===== PROCESSING PANEL ===== -->
+    <section class="processing-panel" id="processingPanel" hidden aria-label="AI Processing Status">
+      <div class="processing-header">
+        <div class="processing-spinner" aria-hidden="true">
+          <div class="processing-spinner-ring"></div>
+          <div class="processing-spinner-ring"></div>
+          <div class="processing-spinner-ring"></div>
+        </div>
+        <div class="processing-info">
+          <span class="processing-title" id="processingTitle">Initializing AI Pipeline</span>
+          <span class="processing-subtitle" id="processingSubtitle">Preparing neural processing engines</span>
+        </div>
+        <div class="processing-metrics" id="processingMetrics">
+          <span class="processing-metric">⏱ <span id="processingTime">0</span>s</span>
+          <span class="processing-metric">📊 <span id="processingProgress">0</span>%</span>
+        </div>
+      </div>
+      
+      <div class="progress-track">
+        <div class="progress-bar" id="progressBar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+      
+      <div class="processing-steps" id="processingSteps" role="list">
+        <div class="ps-step" data-step="extract-text" role="listitem">
+          <div class="ps-dot"></div>
+          <div class="ps-content">
+            <span class="ps-label">Extracting text content</span>
+            <span class="ps-description">Parsing PDF structure and text layers</span>
+          </div>
+          <span class="ps-status"></span>
+        </div>
+        <div class="ps-step" data-step="extract-images" role="listitem">
+          <div class="ps-dot"></div>
+          <div class="ps-content">
+            <span class="ps-label">Extracting embedded images</span>
+            <span class="ps-description">Detecting and saving visual evidence</span>
+          </div>
+          <span class="ps-status"></span>
+        </div>
+        <div class="ps-step" data-step="ai-analysis" role="listitem">
+          <div class="ps-dot"></div>
+          <div class="ps-content">
+            <span class="ps-label">AI reasoning analysis</span>
+            <span class="ps-description">Gemini processing with multi-stage reasoning</span>
+          </div>
+          <span class="ps-status"></span>
+        </div>
+        <div class="ps-step" data-step="conflict-detection" role="listitem">
+          <div class="ps-dot"></div>
+          <div class="ps-content">
+            <span class="ps-label">Conflict detection</span>
+            <span class="ps-description">Comparing findings across reports</span>
+          </div>
+          <span class="ps-status"></span>
+        </div>
+        <div class="ps-step" data-step="merge-findings" role="listitem">
+          <div class="ps-dot"></div>
+          <div class="ps-content">
+            <span class="ps-label">Merging and deduplicating</span>
+            <span class="ps-description">Consolidating observations intelligently</span>
+          </div>
+          <span class="ps-status"></span>
+        </div>
+        <div class="ps-step" data-step="generate-report" role="listitem">
+          <div class="ps-dot"></div>
+          <div class="ps-content">
+            <span class="ps-label">Generating DDR structure</span>
+            <span class="ps-description">Building comprehensive diagnostic report</span>
+          </div>
+          <span class="ps-status"></span>
+        </div>
+        <div class="ps-step" data-step="build-pdf" role="listitem">
+          <div class="ps-dot"></div>
+          <div class="ps-content">
+            <span class="ps-label">Building professional PDF</span>
+            <span class="ps-description">Formatting with enterprise design system</span>
+          </div>
+          <span class="ps-status"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ERROR PANEL ===== -->
+    <section class="error-panel" id="errorPanel" hidden aria-label="Error notification">
+      <div class="error-icon" aria-hidden="true">⚠</div>
+      <div class="error-content">
+        <div class="error-title">Generation Failed</div>
+        <div class="error-message" id="errorMessage">An unexpected error occurred.</div>
+        <div class="error-details" id="errorDetails"></div>
+      </div>
+      <button class="error-retry" id="retryBtn">Try Again</button>
+    </section>
+
+    <!-- ===== RESULTS PANEL ===== -->
+    <section class="results-panel" id="resultsPanel" hidden aria-label="Report Results">
+      
+      <!-- Executive Dashboard -->
+      <div class="dashboard-header">
+        <div class="dashboard-title">
+          <h2 class="dashboard-heading">Executive Dashboard</h2>
+          <span class="dashboard-badge" id="dashboardBadge">✓ Report Ready</span>
+        </div>
+        <div class="dashboard-meta">
+          <span id="dashboardReportId">DDR-2025-001</span>
+          <span id="dashboardTimestamp">—</span>
+        </div>
+      </div>
+      
+      <!-- Summary Metrics -->
+      <div class="summary-bar">
+        <div class="summary-metric">
+          <span class="sm-value" id="smAreas">—</span>
+          <span class="sm-label">Areas Observed</span>
+        </div>
+        <div class="summary-metric">
+          <span class="sm-value" id="smSeverity">—</span>
+          <span class="sm-label">Overall Severity</span>
+        </div>
+        <div class="summary-metric">
+          <span class="sm-value" id="smActions">—</span>
+          <span class="sm-label">Recommended Actions</span>
+        </div>
+        <div class="summary-metric summary-metric--confidence">
+          <div class="confidence-ring" id="confidenceRing">
+            <svg viewBox="0 0 60 60" width="60" height="60">
+              <circle cx="30" cy="30" r="25" class="ring-bg" />
+              <circle cx="30" cy="30" r="25" class="ring-fill" id="confidenceFill"
+                      stroke-dasharray="157.08" stroke-dashoffset="157.08" />
+            </svg>
+            <span class="ring-label" id="smConfidence">—</span>
+          </div>
+          <span class="sm-label">AI Confidence</span>
+        </div>
+      </div>
+
+      <!-- Executive Summary -->
+      <div class="result-section result-section--summary">
+        <div class="rs-header">
+          <span class="rs-label">Executive Summary</span>
+          <span class="rs-badge">Key Insights</span>
+        </div>
+        <div class="rs-body" id="rsSummary">
+          <p class="rs-summary-text">Generating executive summary...</p>
+        </div>
+      </div>
+
+      <!-- Findings Analytics -->
+      <div class="result-section result-section--analytics">
+        <div class="rs-header">
+          <span class="rs-label">Findings Analytics</span>
+        </div>
+        <div class="analytics-grid" id="analyticsGrid">
+          <div class="analytics-card">
+            <span class="analytics-label">Critical</span>
+            <span class="analytics-value" id="analyticsCritical">0</span>
+            <div class="analytics-bar">
+              <div class="analytics-bar-fill" style="width:0%; background: #F43F5E;"></div>
+            </div>
+          </div>
+          <div class="analytics-card">
+            <span class="analytics-label">High</span>
+            <span class="analytics-value" id="analyticsHigh">0</span>
+            <div class="analytics-bar">
+              <div class="analytics-bar-fill" style="width:0%; background: #F97316;"></div>
+            </div>
+          </div>
+          <div class="analytics-card">
+            <span class="analytics-label">Medium</span>
+            <span class="analytics-value" id="analyticsMedium">0</span>
+            <div class="analytics-bar">
+              <div class="analytics-bar-fill" style="width:0%; background: #F59E0B;"></div>
+            </div>
+          </div>
+          <div class="analytics-card">
+            <span class="analytics-label">Low</span>
+            <span class="analytics-value" id="analyticsLow">0</span>
+            <div class="analytics-bar">
+              <div class="analytics-bar-fill" style="width:0%; background: #10B981;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Area Observations -->
+      <div class="result-section result-section--observations">
+        <div class="rs-header">
+          <span class="rs-label">Area Observations</span>
+          <span class="rs-count" id="obsCount">0 findings</span>
+        </div>
+        <div class="observations-list" id="observationsList"></div>
+      </div>
+
+      <!-- Root Cause -->
+      <div class="result-section result-section--root-cause">
+        <div class="rs-header">
+          <span class="rs-label">Probable Root Cause</span>
+        </div>
+        <div class="rs-body" id="rsRootCause">
+          <p class="rs-root-cause-text">Analyzing root cause...</p>
+        </div>
+      </div>
+
+      <!-- Recommendations -->
+      <div class="result-section result-section--recommendations">
+        <div class="rs-header">
+          <span class="rs-label">Recommended Actions</span>
+          <span class="rs-count" id="recCount">0 actions</span>
+        </div>
+        <div class="recommendations-container" id="recommendationsContainer">
+          <div class="recommendations-group" data-priority="immediate">
+            <h4 class="rec-group-title">⚠ Immediate</h4>
+            <ol class="recommendations-list" id="recImmediate"></ol>
+          </div>
+          <div class="recommendations-group" data-priority="short-term">
+            <h4 class="rec-group-title">📅 Short-Term</h4>
+            <ol class="recommendations-list" id="recShortTerm"></ol>
+          </div>
+          <div class="recommendations-group" data-priority="long-term">
+            <h4 class="rec-group-title">🔮 Long-Term</h4>
+            <ol class="recommendations-list" id="recLongTerm"></ol>
+          </div>
+          <div class="recommendations-group" data-priority="preventive">
+            <h4 class="rec-group-title">🛡️ Preventive</h4>
+            <ol class="recommendations-list" id="recPreventive"></ol>
+          </div>
+        </div>
+      </div>
+
+      <!-- Conflicts -->
+      <div class="result-section result-section--conflicts" id="conflictsSection" hidden>
+        <div class="rs-header rs-header--conflict">
+          <span class="rs-label">⚡ Conflicts Detected</span>
+          <span class="rs-count" id="conflictCount">0 conflicts</span>
+        </div>
+        <div class="conflicts-list" id="conflictsList"></div>
+      </div>
+
+      <!-- Missing Information -->
+      <div class="result-section result-section--missing" id="missingSection" hidden>
+        <div class="rs-header">
+          <span class="rs-label">Missing Information</span>
+          <span class="rs-count" id="missingCount">0 items</span>
+        </div>
+        <ul class="missing-list" id="missingList"></ul>
+      </div>
+
+      <!-- Download Bar -->
+      <div class="download-bar">
+        <div class="download-info">
+          <span class="download-icon" aria-hidden="true">✓</span>
+          <div class="download-details">
+            <span class="download-label">Report Ready for Export</span>
+            <span class="download-meta" id="downloadMeta">Generated in 0s · 0 pages</span>
+          </div>
+        </div>
+        <div class="download-actions">
+          <a class="btn-download btn-download--primary" id="downloadPDF" href="#" download="DDR_Report.pdf">
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+            PDF Report
+          </a>
+          <button class="btn-download btn-download--secondary" id="downloadJSON">
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+            JSON Data
+          </button>
+          <button class="btn-download btn-download--ghost" id="newReportBtn">
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.586l2.293-2.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0L5 10.414V17a1 1 0 11-2 0V3a1 1 0 011-1z" clip-rule="evenodd" />
+            </svg>
+            New Report
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ============================================================ -->
+  <!-- FOOTER                                                        -->
+  <!-- ============================================================ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="footer-text">© 2026 DDR AI · Enterprise Document Intelligence</span>
+      <span class="footer-version">v2.0.0 · <span class="footer-status">All systems operational</span></span>
+    </div>
+  </footer>
+
+  <!-- ============================================================ -->
+  <!-- SCRIPTS                                                        -->
+  <!-- ============================================================ -->
+  <!-- Load the main application script -->
+  <script src="../scripts/homepage.js"></script>
+</body>
+</html>

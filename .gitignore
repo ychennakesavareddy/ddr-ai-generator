@@ -1,0 +1,133 @@
+# =========================
+
+# Python
+
+# =========================
+
+**pycache**/
+*.py[cod]
+*$py.class
+
+# Virtual Environments
+
+venv/
+env/
+.venv/
+
+# =========================
+
+# Environment Variables
+
+# =========================
+
+.env
+.env.local
+.env.development
+.env.production
+
+# =========================
+
+# IDEs
+
+# =========================
+
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# =========================
+
+# OS Files
+
+# =========================
+
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# =========================
+
+# Logs
+
+# =========================
+
+*.log
+logs/
+
+# =========================
+
+# Backend Generated Files
+
+# =========================
+
+backend/uploads/
+backend/generated_reports/
+backend/extracted_images/
+
+# Temporary Files
+
+*.tmp
+*.temp
+
+# =========================
+
+# Build Files
+
+# =========================
+
+dist/
+build/
+
+# =========================
+
+# Cache
+
+# =========================
+
+.cache/
+.pytest_cache/
+.mypy_cache/
+
+# =========================
+
+# Jupyter
+
+# =========================
+
+.ipynb_checkpoints/
+
+# =========================
+
+# Coverage
+
+# =========================
+
+.coverage
+htmlcov/
+
+# =========================
+
+# Secrets
+
+# =========================
+
+*.pem
+*.key
+*.crt
+*.p12
+
+# AWS
+
+.aws/
+
+# Terraform
+
+.terraform/
+
+# Node
+
+node_modules/
+"backend/logo.png" 
+"backend/test_gemini.py" 
+"backend/test_hf.py" 

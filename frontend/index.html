@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI DDR Report Generator</title>
+  <link rel="stylesheet" href="styles/index.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <span class="logo-mark">◈</span>
+        <span class="logo-text">DDR<span class="logo-accent">AI</span></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#workflow">Workflow</a></li>
+        <li><a href="#stack">Technology</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+      <a href="templates/homepage.html" class="nav-cta">Launch App</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-grid-overlay"></div>
+    <div class="hero-inner">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        Powered by Google Gemini AI
+      </div>
+      <h1 class="hero-heading">
+        Turn Inspection Data<br />
+        into <span class="heading-accent">Diagnostic Reports</span><br />
+        Automatically
+      </h1>
+      <p class="hero-sub">
+        Upload your Inspection and Thermal PDFs. Our AI extracts, merges, and analyzes findings — detecting conflicts, assessing severity, and delivering a professional DDR in seconds.
+      </p>
+      <div class="hero-actions">
+        <a href="templates/homepage.html" class="btn-primary">
+          Generate DDR Report
+          <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+        </a>
+        <a href="#workflow" class="btn-ghost">See how it works</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num">2</span>
+          <span class="stat-label">PDFs in</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num">AI</span>
+          <span class="stat-label">Analysis</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num">1</span>
+          <span class="stat-label">DDR out</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="report-card report-card--inspection">
+        <div class="rc-header">
+          <div class="rc-dot rc-dot--blue"></div>
+          <span>Inspection Report</span>
+        </div>
+        <div class="rc-lines">
+          <div class="rc-line rc-line--full"></div>
+          <div class="rc-line rc-line--75"></div>
+          <div class="rc-line rc-line--50"></div>
+        </div>
+        <div class="rc-tag">PDF</div>
+      </div>
+      <div class="merge-arrow">
+        <svg viewBox="0 0 60 120"><path d="M30 0 L30 50 M10 50 L50 50 L30 80" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="merge-label">AI Merge</span>
+      </div>
+      <div class="report-card report-card--thermal">
+        <div class="rc-header">
+          <div class="rc-dot rc-dot--amber"></div>
+          <span>Thermal Report</span>
+        </div>
+        <div class="rc-lines">
+          <div class="rc-line rc-line--full"></div>
+          <div class="rc-line rc-line--60"></div>
+          <div class="rc-line rc-line--80"></div>
+        </div>
+        <div class="rc-tag rc-tag--amber">PDF</div>
+      </div>
+      <div class="output-card">
+        <div class="oc-header">
+          <div class="rc-dot rc-dot--green"></div>
+          <span>DDR Report</span>
+          <span class="oc-badge">Generated</span>
+        </div>
+        <div class="oc-sections">
+          <div class="oc-section">Executive Summary</div>
+          <div class="oc-section">Area Observations</div>
+          <div class="oc-section">Root Cause Analysis</div>
+          <div class="oc-section">Recommendations</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features" id="features">
+    <div class="section-inner">
+      <div class="section-label">Capabilities</div>
+      <h2 class="section-heading">Everything an inspector needs,<br/>automated by AI</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">⬡</div>
+          <h3>PDF Text Extraction</h3>
+          <p>Full-page text extracted in reading order using PyMuPDF. Handles multi-column layouts, damaged PDFs, and mixed encodings.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⬡</div>
+          <h3>Thermal Analysis</h3>
+          <p>Parses thermal imaging reports to identify temperature anomalies, moisture signatures, and insulation failures.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⬡</div>
+          <h3>Image Extraction</h3>
+          <p>Pulls all embedded images, deduplicates them by hash, and associates each with its source page for evidence linking.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⬡</div>
+          <h3>Conflict Detection</h3>
+          <p>Compares inspection and thermal findings. Flags when reports contradict — e.g. "no moisture" vs. "thermal anomaly detected."</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⬡</div>
+          <h3>Duplicate Merging</h3>
+          <p>Identifies semantically equivalent observations across both reports and consolidates them into a single authoritative finding.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⬡</div>
+          <h3>Severity Assessment</h3>
+          <p>Each observation is classified Critical / High / Medium / Low based on structural risk, safety impact, and urgency.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⬡</div>
+          <h3>Root Cause Analysis</h3>
+          <p>Gemini infers probable causes from the evidence — pointing to construction defects, material failure, or deferred maintenance.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⬡</div>
+          <h3>Professional PDF Generation</h3>
+          <p>Outputs a branded, paginated DDR with cover page, executive summary, embedded images, and numbered recommendations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORKFLOW -->
+  <section class="workflow" id="workflow">
+    <div class="section-inner">
+      <div class="section-label">Process</div>
+      <h2 class="section-heading">From two PDFs to a complete diagnostic report</h2>
+      <div class="workflow-steps">
+        <div class="wf-step">
+          <div class="wf-num">01</div>
+          <div class="wf-content">
+            <h3>Upload Reports</h3>
+            <p>Drag and drop your Inspection PDF and Thermal PDF. Files are validated and securely processed.</p>
+          </div>
+        </div>
+        <div class="wf-connector"></div>
+        <div class="wf-step">
+          <div class="wf-num">02</div>
+          <div class="wf-content">
+            <h3>Extract & Parse</h3>
+            <p>PyMuPDF extracts all text and images from both PDFs, preserving page structure and evidence associations.</p>
+          </div>
+        </div>
+        <div class="wf-connector"></div>
+        <div class="wf-step">
+          <div class="wf-num">03</div>
+          <div class="wf-content">
+            <h3>AI Analysis</h3>
+            <p>Gemini receives both reports and runs structured analysis: merging duplicates, flagging conflicts, scoring severity.</p>
+          </div>
+        </div>
+        <div class="wf-connector"></div>
+        <div class="wf-step">
+          <div class="wf-num">04</div>
+          <div class="wf-content">
+            <h3>Download DDR</h3>
+            <p>A professional PDF DDR is generated with all findings, images, and recommendations ready for client delivery.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECH STACK -->
+  <section class="stack" id="stack">
+    <div class="section-inner">
+      <div class="section-label">Technology</div>
+      <h2 class="section-heading">Built on production-grade infrastructure</h2>
+      <div class="stack-grid">
+        <div class="stack-group">
+          <div class="stack-group-label">AI</div>
+          <div class="stack-item">
+            <span class="stack-name">Google Gemini</span>
+            <span class="stack-role">LLM Analysis Engine</span>
+          </div>
+        </div>
+        <div class="stack-group">
+          <div class="stack-group-label">Backend</div>
+          <div class="stack-item">
+            <span class="stack-name">FastAPI</span>
+            <span class="stack-role">REST API & File Handling</span>
+          </div>
+          <div class="stack-item">
+            <span class="stack-name">PyMuPDF</span>
+            <span class="stack-role">PDF Text & Image Extraction</span>
+          </div>
+          <div class="stack-item">
+            <span class="stack-name">ReportLab</span>
+            <span class="stack-role">Professional PDF Generation</span>
+          </div>
+        </div>
+        <div class="stack-group">
+          <div class="stack-group-label">Frontend</div>
+          <div class="stack-item">
+            <span class="stack-name">Vanilla JavaScript</span>
+            <span class="stack-role">Zero-dependency UI</span>
+          </div>
+          <div class="stack-item">
+            <span class="stack-name">HTML / CSS</span>
+            <span class="stack-role">Responsive Design</span>
+          </div>
+        </div>
+        <div class="stack-group">
+          <div class="stack-group-label">Cloud</div>
+          <div class="stack-item">
+            <span class="stack-name">AWS EC2</span>
+            <span class="stack-role">Backend Compute</span>
+          </div>
+          <div class="stack-item">
+            <span class="stack-name">AWS Amplify</span>
+            <span class="stack-role">Frontend Hosting</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="section-inner about-inner">
+      <div class="about-text">
+        <div class="section-label">About</div>
+        <h2 class="section-heading">Built for property inspectors and diagnostic professionals</h2>
+        <p>DDR AI Generator replaces the manual process of cross-referencing inspection and thermal reports. Instead of hours spent comparing findings, spotting contradictions, and writing summaries — this system does it in under a minute.</p>
+        <p>The output is a structured, client-ready Detailed Diagnostic Report that holds up to professional scrutiny: every finding sourced, every conflict documented, every recommendation specific and actionable.</p>
+        <a href="templates/homepage.html" class="btn-primary">Start generating reports</a>
+      </div>
+      <div class="about-features">
+        <div class="about-feat">
+          <div class="af-icon">✓</div>
+          <div>Never hallucinate — only report what the documents contain</div>
+        </div>
+        <div class="about-feat">
+          <div class="af-icon">✓</div>
+          <div>Explicit "Not Available" when information is missing</div>
+        </div>
+        <div class="about-feat">
+          <div class="af-icon">✓</div>
+          <div>Confidence scoring on all AI-generated sections</div>
+        </div>
+        <div class="about-feat">
+          <div class="af-icon">✓</div>
+          <div>Reusable for any inspection type — not hardcoded</div>
+        </div>
+        <div class="about-feat">
+          <div class="af-icon">✓</div>
+          <div>Download both PDF and raw JSON for integration</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATUS INDICATOR (dev mode info) -->
+  <div id="dev-status-indicator" class="dev-status-indicator" style="display: none;">
+    <div class="dev-status-content">
+      <span class="dev-status-label">🔧 Development Mode</span>
+      <span class="dev-status-api" id="dev-api-url"></span>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="logo-mark">◈</span>
+        <span class="logo-text">DDR<span class="logo-accent">AI</span></span>
+      </div>
+      <p class="footer-copy">AI DDR Report Generator — Turning inspection data into diagnostic clarity.</p>
+      <a href="templates/homepage.html" class="footer-cta">Generate Report →</a>
+    </div>
+  </footer>
+
+  <script>
+    /**
+     * Development Mode Indicator
+     * Shows API endpoint in development mode for debugging
+     */
+    (function initDevIndicator() {
+      const isDev = window.location.hostname === 'localhost' || 
+                    window.location.hostname === '127.0.0.1' ||
+                    window.location.hostname.startsWith('192.168');
+      
+      if (isDev) {
+        const indicator = document.getElementById('dev-status-indicator');
+        const apiUrl = document.getElementById('dev-api-url');
+        const apiEndpoint = 'http://127.0.0.1:8000';
+        
+        indicator.style.display = 'flex';
+        apiUrl.textContent = `API: ${apiEndpoint}`;
+        
+        console.log('%c[DDR AI] Development Mode Detected', 'color: #4CAF50; font-weight: bold;');
+        console.log(`%cAPI Endpoint: ${apiEndpoint}`, 'color: #2196F3;');
+        console.log('%cMake sure backend is running with: python main.py', 'color: #FF9800;');
+      }
+    })();
+  </script>
+
+  <script src="scripts/index.js"></script>
+</body>
+</html>
